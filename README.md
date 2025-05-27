@@ -1,3 +1,10 @@
+# P4 IPv6 Switch Implementation
+
+This P4 program implements an IPv6-capable switch with support for L2 bridging, L3 routing, ACL, and NDP handling.
+
+## Complete P4 Code
+
+```p4
 /*
  * Copyright 2019-present Open Networking Foundation
  *
@@ -671,3 +678,22 @@ V1Switch(
   ComputeChecksumImpl(),
   DeparserImpl()
 ) main;
+```
+
+## Features
+
+- **L2 Bridging**: Supports both exact and ternary matching for unicast and multicast forwarding
+- **L3 IPv6 Routing**: Implements IPv6 routing with ECMP support using action selectors
+- **Access Control Lists (ACL)**: Provides packet filtering and control plane forwarding
+- **NDP Handling**: Automatic NDP Neighbor Solicitation to Neighbor Advertisement conversion
+- **Packet I/O**: Support for packet-in and packet-out operations with the control plane
+
+## Key Changes
+
+- Updated NDP reply table from `ndp_reply_table_group03` to `ndp_reply_table_group02`
+- Implemented packet-in header validation in the egress pipeline
+- Added comprehensive checksum computation for ICMPv6/NDP packets
+
+## Usage
+
+This P4 program is designed to work with the v1model architecture and can be compiled using the P4 compiler (p4c) and deployed on compatible software switches like BMv2 or hardware targets that support P4Runtime.
